@@ -1,0 +1,22 @@
+.navbar-btn{
+    height: 35px;
+    width:50%;
+    border-radius: 5px;
+    font-size: large;
+    /* margin-left: 1rem; */
+    border: none;
+    cursor: pointer;
+    background-color:#C6362B;
+}
+
+.navbar-btn:hover{
+    background-color: goldenrod;
+}
+
+@media screen and (max-width : 800px) {
+    .navbar-btn{
+        margin-left: 0;
+        margin-bottom:1rem ;
+    }
+    
+}

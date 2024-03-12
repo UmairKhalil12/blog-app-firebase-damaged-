@@ -1,0 +1,103 @@
+.blogsection-main{
+    text-align: left;
+}
+
+.blog-btn{
+    border-radius: 5px;
+    border: none;
+    widows: 30%;
+    height: 35px;
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+.blogsection-map{
+    display: flex;
+    justify-content: space-around;
+    text-align: left;
+}
+
+.blog-readmore-edit-btn{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+
+.blog-edit-delete{
+    display: flex;
+    justify-content: space-around;
+}
+
+.blog-edit-delete button{
+    margin-left: 0.5rem;
+    background: transparent;
+    cursor: pointer;
+    border: none;
+}
+
+.blog-edit-delete button:hover{
+    color: red;
+}
+
+.blogsection-category{
+    background-color: #447bc0;
+    color: white;
+    width: min-content;
+    padding: 0.1rem;
+    border-radius: 3px;
+}
+
+.title-timestamp{
+    display: flex;
+    justify-content: space-evenly;
+    width: max-content;
+}
+
+.blogsection-title{
+    font-weight: bold;
+}
+
+.blogsection-date{
+    margin-left: 0.3rem;
+}
+
+.blogsection-author{
+    font-weight: 600;
+}
+
+.blogsection-description{
+    text-align: center;
+}
+
+.blogsection-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 250px;
+    margin-right: 1rem;
+    margin-top: 1.1rem;
+}
+
+.blogsection-map{
+    margin-bottom: 1rem;
+}
+
+@media screen and (max-width : 768px) {
+    .blog-readmore-edit-btn{
+        width: 100%;
+    }
+
+    .blogsection-map{
+        text-align: left;
+    }
+    
+}
+
+@media screen and (max-width : 550px) {
+    .blogsection-map{
+        flex-direction: column;
+    }
+    
+}

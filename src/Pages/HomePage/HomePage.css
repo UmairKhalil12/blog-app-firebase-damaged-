@@ -1,0 +1,37 @@
+.main-home {
+    text-align: center;
+}
+
+.main-home-blogs {
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.home-blog-blogsection {
+    width: 60%;
+    margin-left: 2rem;
+}
+
+.home-tag-popular {
+    width: 40%;
+}
+
+@media screen and (max-width : 768px) {
+    .main-home-blogs {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .home-blog-blogsection {
+        text-align: center;
+        width: 90%;
+    }
+
+    .home-tag-popular {
+        text-align: center;
+        width: 90%;
+    }
+
+}

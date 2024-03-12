@@ -1,0 +1,16 @@
+.main-signup{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    text-align: center;
+}
+
+.main-signup div{
+    padding: 0.75rem;
+}
+
+.form-link-p{
+    color: blue;
+    cursor: pointer;
+}

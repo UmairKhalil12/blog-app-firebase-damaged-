@@ -1,0 +1,86 @@
+.main-input {
+  position: relative;
+}
+
+.main-input input {
+  height: 35px;
+  width: 80%;
+  border-radius: 5px;
+  border: 1px solid grey;
+  background-color: transparent;
+  padding-left: 40px;
+  position: relative;
+}
+
+.input-img,
+.input-img-2,
+.input-img-pass {
+  font-size: 1.5rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.input-img {
+  /* left: 90px; */
+  left: 11%;
+}
+
+.input-img-2 {
+  /* left: 90px; */
+  left: 11%;
+}
+
+.input-img-pass {
+  /* right: 90px; */
+  right: 11%;
+  cursor: pointer;
+}
+
+@media screen  and (max-width: 768px){
+  .input-img{
+    /* left: 75px; */
+    left: 18%;
+  }
+
+  .input-img-2 {
+    /* left: 75px; */
+    left: 18%;
+  }
+
+  .input-img-pass {
+    /* right: 75px; */
+    right: 18%;
+  }
+
+}
+
+@media screen and (max-width: 550px) {
+  .input-img {
+    left: 40px;
+  }
+
+  .input-img-2 {
+    left: 40px;
+  }
+
+  .input-img-pass {
+    right: 40px;
+  }
+
+}
+
+@media screen and (max-width: 400px) {
+  .input-img {
+    left: 35px;
+  }
+
+  .input-img-2 {
+    left: 35px;
+  }
+
+  .input-img-pass {
+    right: 35px;
+  }
+
+}

@@ -1,0 +1,52 @@
+.most-popular{
+    display: flex;
+    margin: 0.75rem;
+    cursor: pointer;
+}
+
+.most-popular-img-div{
+    margin-left: 1.5rem;
+}
+
+.most-popular-img{
+    height: 120px;
+    width: 200px;
+}
+
+.most-popular-blog-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1rem;
+}
+
+.most-popular-date{
+    color: grey;
+    text-align: left;
+    font-size: 14px;
+}
+
+@media screen and (max-width:768px) {
+    .most-popular-img{
+        height: 150px;
+        width: 250px;
+    }   
+}
+
+@media screen and (max-width : 550px) {
+    .most-popular{
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+    }
+
+    .most-popular-blog-content{
+        text-align: center;
+        margin-left: 0;
+    }
+
+    .most-popular-img-div{
+        margin-left: 0rem;
+    }
+    
+}

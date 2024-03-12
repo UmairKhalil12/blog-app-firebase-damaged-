@@ -1,0 +1,26 @@
+.tag-mapping{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.tag{
+    margin: 0.2rem;
+    background-color: lightgray;
+    border-radius: 3px;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.tag:hover{
+    color: white;
+    background-color: goldenrod;
+}
+
+@media screen and (max-width : 768px) {
+    .tag-mapping{
+        text-align: center;
+    }
+
+    
+}

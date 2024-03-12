@@ -1,0 +1,113 @@
+.main-container-add-edit-blog{
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+.form-add-edit-blog{
+    width: 60%;  
+    text-align: center;  
+}
+
+.form-add-edit-blog div{
+    padding: 0.3rem;
+}
+
+.main-input input{
+    width: 75%;
+}
+
+.form-add-edit-blog-category-select{
+    width:80%;
+    padding-left: 40px;
+    height: 33px;
+    border-radius: 5px;
+    border: 1px solid grey;
+}
+
+.trending-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+}
+
+.trending-form-yes-no input{
+    margin-left: 0.5rem;
+}
+ 
+.trending-form-yes-no{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.create-blog-form-choose-file-btn{
+    height: 40px;
+    height: auto;
+    padding: 0.5rem;
+}
+
+.trending-form-file-div{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 1rem;
+}
+
+.add-edit-blog-form-description{
+    width: 80%;
+    margin-top: 1rem;
+    padding-left: 40px;
+}
+
+div.form-add-edit-blog-input-tag {
+    width: 80%;
+    margin-left: 4.5rem;
+  }
+
+.trending-form-file-div input{
+    border: none;
+}
+
+.add-edit-blog-form-description-textarea{
+    border: 1px solid grey;
+    width: 79%;
+    margin-top: 0.8rem;
+    border-radius: 5px;
+}
+
+
+
+
+@media screen  and (max-width : 800px){
+    .form-add-edit-blog{
+        padding: 1rem;
+        text-align: center;
+    }
+    .form-add-edit-blog{
+        width: 60%;
+    }
+    .main-input input{
+        width: 60%;
+    }
+    .form-add-edit-blog-category-select{
+        width: 68%;
+    }
+    .add-edit-blog-form-description-textarea{
+        width: 67%;
+    }
+    div.form-add-edit-blog-input-tag {
+        width: 69%;
+        margin-left: 4.2rem;
+      }
+}
+
+@media screen and (max-width : 450px){
+    div.form-add-edit-blog-input-tag {
+        width: 77%;
+        margin-left: 1.5rem;
+      }
+
+}
