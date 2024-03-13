@@ -12,10 +12,10 @@ import useStore from '../../Utility/Zustand/Zustand'
 
 
 export default function BlogSection({ blogs }) {
-    const [ setLoading] = useState(true);
+    const [ loading,setLoading] = useState(true);
 
     const { userInfo, user } = useStore();
-    console.log('blogsection', userInfo);
+    // console.log('blogsection', userInfo);
 
     const handleBlogDelete = async (id) => {
         if (window.confirm("Are you sure you want to delete the blog?"))
@@ -69,6 +69,7 @@ export default function BlogSection({ blogs }) {
                                             <>
                                                 <Link to={`/update/${item.id}`}><button><FaRegEdit size={30} /></button></Link>
                                                 <button onClick={() => handleBlogDelete(item.id)} ><MdDelete size={30} /></button>
+                                                {/* {console.log('delete blog id', item.id)} */}
                                             </>
                                             : null
                                         }

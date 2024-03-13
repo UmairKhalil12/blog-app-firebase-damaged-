@@ -20,6 +20,7 @@ const initialState = {
     trending: 'no',
     category: 'fashion',
     description: '',
+    imgUrl: '',
 }
 
 const categoryOption = [
@@ -72,8 +73,8 @@ export default function AddEditBlog() {
 
                 async () => {
                     await getDownloadURL(uploadTask.snapshot.ref).then((downloadUrl) => {
-                        toast.info("Image uploaded to firebase sucessfully")
                         setForm((prev) => ({ ...prev, imgUrl: downloadUrl }))
+                        toast.info("Image uploaded to firebase sucessfully")
                     })
                 }
 
@@ -150,26 +151,26 @@ export default function AddEditBlog() {
 
     const { id } = useParams();
 
-    // const getBlogDetail = async () => {
-    //     try {
-    //         const docRef = doc(db, 'blogs', id)
-    //         const snapshot = await getDoc(docRef);
-    //         if (snapshot.exists()) {
-    //             setForm((prev) => ({
-    //                 ...prev,
-    //                 ...snapshot.data(),
-    //             }));
-    //         }
-    //     }
-    //     catch (error) {
-    //         console.log('error getting updating blog data');
-    //     }
-    // }
-    // useEffect(() => {
-    //     if (id) {
-    //         getBlogDetail();
-    //     }
-    // }, [id , getBlogDetail()])
+    const getBlogDetail = async () => {
+        try {
+            const docRef = doc(db, 'blogs', id)
+            const snapshot = await getDoc(docRef);
+            if (snapshot.exists()) {
+                setForm((prev) => ({
+                    ...prev,
+                    ...snapshot.data(),
+                }));
+            }
+        }
+        catch (error) {
+            console.log('error getting updating blog data');
+        }
+    }
+    useEffect(() => {
+        if (id) {
+            getBlogDetail();
+        }
+    }, [id])
 
 
     return (
@@ -246,10 +247,9 @@ export default function AddEditBlog() {
                             onChange={(event) => setFile(event.target.files[0])} />
                     </div>
 
-                    {id ? <Button text='Update' disable={progress != null && progress < 100} type ='submit'  />
-                        : <Button text='Submit' disable={progress != null && progress < 100} type ='submit' />}
-                    {/* {id ? <button disable={progress != null && progress < 100} type='submit'  >Update</button>
-                        : <button disable={progress != null && progress < 100} type='submit' onClick={handleSubmit} >Submit</button>} */}
+                    {id ? <Button text='Update' disable={progress != null && progress < 100} type='submit' />
+                        : <Button text='Submit' disable={progress != null && progress < 100} type='submit' />}
+
 
                 </form>
             </div>
