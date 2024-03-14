@@ -2,6 +2,8 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    margin: 0 auto;
+    width: 80%;
 }
 
 .tag{

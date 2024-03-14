@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom'
-import './Search.css'
 import { IoMdSearch } from "react-icons/io";
 import './Search.css'
 
@@ -32,7 +31,7 @@ export default function Search({ search, handleChange }) {
                         onChange={handleChange}
                     />
                 </div>
-                <button className='' type='submit'><IoMdSearch size={25} /></button>
+                <button className='search-icn-btn' type='submit'><IoMdSearch size={25} /></button>
             </form>
         </div>
     )

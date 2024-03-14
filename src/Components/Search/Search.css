@@ -2,3 +2,15 @@
     display: flex;
     justify-content: center;
 }
+
+.search-icn-btn{
+    background-color: gray;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+
+.search-icn-btn:hover{
+    background-color: goldenrod;
+}
+

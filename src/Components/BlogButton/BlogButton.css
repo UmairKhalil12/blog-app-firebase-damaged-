@@ -1,0 +1,12 @@
+.blog-btn{
+    border-radius: 5px;
+    border: none;
+    widows: 30%;
+    height: 33px;
+    background-color: gray;
+    cursor: pointer;
+}
+
+.blog-btn:hover{
+    background-color: goldenrod;
+}

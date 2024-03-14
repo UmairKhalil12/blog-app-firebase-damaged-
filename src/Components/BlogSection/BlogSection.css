@@ -2,14 +2,7 @@
     text-align: left;
 }
 
-.blog-btn{
-    border-radius: 5px;
-    border: none;
-    widows: 30%;
-    height: 35px;
-    background-color: lightgray;
-    cursor: pointer;
-}
+
 
 .blogsection-map{
     display: flex;

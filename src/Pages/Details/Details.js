@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import './Details.css'
-import { useParams } from 'react-router-dom'
-import { doc, getDoc } from 'firebase/firestore'
-import { db } from '../../Utility/Firebase/firebase'
-import Heading from '../../Components/Heading/Heading'
-import Spinner from '../../Components/Spinner/Spinner'
-import Tags from '../../Components/Tags/Tags'
-import useStore from '../../Utility/Zustand/Zustand'
-import MostPopular from '../../Components/MostPopular/MostPopular'
+import { useParams } from 'react-router-dom';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../Utility/Firebase/firebase';
+import Heading from '../../Components/Heading/Heading';
+import Spinner from '../../Components/Spinner/Spinner';
+import Tags from '../../Components/Tags/Tags';
+import useStore from '../../Utility/Zustand/Zustand';
+import MostPopular from '../../Components/MostPopular/MostPopular';
 
 export default function Details() {
   const [loading, setLoading] = useState(true)
@@ -38,7 +38,7 @@ export default function Details() {
       getBlogDetail();
       setLoading(true);
     }
-  }, [id ])
+  }, [id])
 
   if (loading) {
     return <Spinner />

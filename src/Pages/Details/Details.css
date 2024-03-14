@@ -2,10 +2,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 300px;
+    height: 550px;
     text-align: center;
     /* background-repeat: no-repeat; */
     background-position: center;
+    background-size: cover;
 }
 
 .detail-blog{
@@ -18,8 +19,9 @@
 }
 
 .detail-blog-description{
-    margin-left: 1rem;
-    width: 50%;
+    margin-left: 1.5rem;
+    width: 90%;
+    text-align: justify;
 }
 
 .detail-blog-author-date{
@@ -36,7 +38,7 @@
 }
 
 .detail-blog-tags{
-    margin-left: 1rem;
+    margin-left: 1.5rem;
 }
 
 @media screen and (max-width : 768px) {

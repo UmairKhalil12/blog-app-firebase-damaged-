@@ -29,7 +29,8 @@ const categoryOption = [
     "Food",
     "Politics",
     "Sports",
-    "Buisness"
+    "Buisness",
+    "Architecture"
 ]
 
 export default function AddEditBlog() {
