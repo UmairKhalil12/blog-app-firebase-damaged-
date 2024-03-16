@@ -7,8 +7,9 @@ import About from '../About/About'
 //import NoPage from "../NoPage/NoPage";
 import ForgetPassword from "../ForgetPassword/ForgetPassword";
 import useStore from "../../Utility/Zustand/Zustand";
-import ErrorPage from "../ErrorPage/ErrorPage";
+// import ErrorPage from "../ErrorPage/ErrorPage";
 import HomePage from "../HomePage/HomePage";
+import TagBlog from "../TagBlog/TagBlog";
 
 
 export default function Routing() {
@@ -27,6 +28,7 @@ export default function Routing() {
             <Route path="/about" element={<About />} />
             {user ? null : <Route path="/forgetpassword" element={<ForgetPassword />} />}
             <Route path="/search" element={<HomePage />} />
+            <Route path="/tag/:tag" element={<TagBlog />} />
            
         </Routes>
     )

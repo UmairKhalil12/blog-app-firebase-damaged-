@@ -3,7 +3,7 @@ import Input from "../../Components/Input/Input"
 import Label from "../../Components/Label/Label"
 import Heading from "../../Components/Heading/Heading"
 import "./AddEditBlog.css"
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useState } from "react"
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 import { db, storage } from "../../Utility/Firebase/firebase"
@@ -37,11 +37,8 @@ export default function AddEditBlog() {
     const navigate = useNavigate();
     const [form, setForm] = useState(initialState);
     const [file, setFile] = useState();
-    // const [textDescription] = useState();
-    // const [text] = useState();
-
     const { userInfo } = useStore();
-    console.log('add edit userinfo', userInfo)
+    // console.log('add edit userinfo', userInfo)
 
 
     const { title, tags, category, trending, description } = form
@@ -152,7 +149,7 @@ export default function AddEditBlog() {
 
     const { id } = useParams();
 
-    const getBlogDetail = async () => {
+    const getBlogDetail = useCallback( async () => {
         try {
             const docRef = doc(db, 'blogs', id)
             const snapshot = await getDoc(docRef);
@@ -166,12 +163,13 @@ export default function AddEditBlog() {
         catch (error) {
             console.log('error getting updating blog data');
         }
-    }
+    } , [id] )
+    
     useEffect(() => {
         if (id) {
             getBlogDetail();
         }
-    }, [id])
+    }, [id , getBlogDetail])
 
 
     return (

@@ -1,15 +1,18 @@
 import React from 'react'
 import './Tags.css'
+import { Link } from 'react-router-dom'
 
 function Tags({ tags }) {
     return (
         <div>
-            <h3 style={{color : 'gray'}}>Tags</h3>
+            <h3 style={{ color: 'gray' }}>Tags</h3>
             <hr />
             <div className='tag-mapping'>
-                {tags.map((tag, index) => {
+                {tags?.map((tag, index) => {
                     return (
-                        <span className='tag'>{tag}</span>
+                        <Link to={`/tag/${tag}`} style={{textDecoration : "none", color : 'black'}} >
+                            <p className='tag'>{tag}</p>
+                        </Link>
                     )
                 })}
             </div>

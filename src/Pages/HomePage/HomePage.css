@@ -11,6 +11,7 @@
 .home-blog-blogsection {
     width: 60%;
     margin-left: 2rem;
+    margin-bottom: 1rem;
 }
 
 .home-tag-popular {
@@ -19,6 +20,8 @@
     display: flex;
     justify-content: center;
 }
+
+
 
 @media screen and (max-width : 768px) {
     .main-home-blogs {

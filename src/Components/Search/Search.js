@@ -1,10 +1,9 @@
 import { useNavigate } from 'react-router-dom'
 import { IoMdSearch } from "react-icons/io";
 import './Search.css'
-
 import React from 'react'
 import Input from '../Input/Input';
-import Heading from '../Heading/Heading';
+
 
 export default function Search({ search, handleChange }) {
     const navigate = useNavigate();

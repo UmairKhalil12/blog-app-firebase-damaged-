@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import './Details.css'
 import { useParams } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
@@ -18,7 +18,7 @@ export default function Details() {
   const { tags } = useStore();
   console.log('blogs , tags', blogs, tags);
 
-  const getBlogDetail = async () => {
+  const getBlogDetail = useCallback( async () => {
     try {
       const docRef = doc(db, 'blogs', id);
       const blogDetail = await getDoc(docRef)
@@ -31,14 +31,14 @@ export default function Details() {
       setLoading(false)
     }
 
-  }
+  } , [id] ) 
 
   useEffect(() => {
     if (id) {
       getBlogDetail();
       setLoading(true);
     }
-  }, [id])
+  }, [id , getBlogDetail])
 
   if (loading) {
     return <Spinner />

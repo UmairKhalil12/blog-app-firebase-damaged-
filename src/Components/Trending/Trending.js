@@ -3,7 +3,7 @@ import React from 'react'
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 export default function Trending({ blogs }) {
     const options = {
@@ -25,6 +25,9 @@ export default function Trending({ blogs }) {
             },
         }
     }
+
+    //const navigate = useNavigate(); 
+
     return (
         <div className='trending-main'>
             <h3 style={{ color: 'gray' }} >Trending</h3>
@@ -33,10 +36,10 @@ export default function Trending({ blogs }) {
                 <OwlCarousel className='owl-theme' {...options}>
                     {blogs?.map((items, index) => {
                         return (
-                            <div key={items.id} >
+                            <div key={items.id + index} >
                                 <div className='trending-blogs-div' style={{ backgroundImage: `url(${items.imgUrl})` }}>
                                     <Link to={`/detail/${items.id}`}>
-                                        <div>
+                                        <div >
                                             <div><p>{items.title}</p></div>
                                             <div className='trending-blog-div-author-date'>
                                                 <p className='trending-blog-content-author'>{items.author}</p>

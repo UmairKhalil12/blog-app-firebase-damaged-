@@ -11,8 +11,10 @@ import { db } from '../../Utility/Firebase/firebase'
 import useStore from '../../Utility/Zustand/Zustand'
 
 
-export default function BlogSection({ blogs }) {
-    const [ loading,setLoading] = useState(true);
+export default function BlogSection({id , title , imgUrl, category , author, timestamp , description , userId }) {
+    const [loading, setLoading] = useState(true);
+
+    // console.log('blog section loading',loading)
 
     const { userInfo, user } = useStore();
     // console.log('blogsection', userInfo);
@@ -31,57 +33,51 @@ export default function BlogSection({ blogs }) {
             }
     }
 
-    const userId = userInfo?.uid;
+    const currentUserId = userInfo?.uid;
 
     // console.log('blogsection', blogs)
     return (
 
         <div className='blogsection-main' >
-            <h3>Daily Blogs</h3>
-            <hr></hr>
-            {
-                blogs?.map((item) => {
-                    return (
-                        <div className='blogsection-map' key={item.id}>
-                            <div>
-                                <img src={item.imgUrl} alt={item.title} className='blogsection-img' />
-                            </div>
+            
 
-                            <div>
-                                <p className='blogsection-category'>{item.category}</p>
-                                <p className='blogsection-title'>{item.title}</p>
-                                <div className='title-timestamp'>
-                                    <p className='blogsection-author'>{item.author}</p>
-                                    <p className='blogsection-date'>{item.timestamp.toDate().toDateString()}</p>
-                                </div>
+            <div className='blogsection-map' key={id}>
+                <div>
+                    <img src={imgUrl} alt={title} className='blogsection-img' />
+                </div>
 
-                                <p className='blogsection-description'>{excerpt(item.description, 120)}</p>
+                <div>
+                    <p className='blogsection-category'>{category}</p>
+                    <p className='blogsection-title'>{title}</p>
+                    <div className='title-timestamp'>
+                        <p className='blogsection-author'>{author}</p>
+                        <p className='blogsection-date'>{timestamp.toDate().toDateString()}</p>
+                    </div>
 
-                                <div className='blog-readmore-edit-btn'>
-                                    <div>
-                                        <Link to={`/detail/${item.id}`} >
-                                            <BlogButton text='Read More' />
-                                        </Link>
+                    <p className='blogsection-description'>{excerpt(description, 120)}</p>
 
-                                    </div>
-                                    <div className='blog-edit-delete'>
-                                        {user && userId === item?.userId ?
-                                            <>
-                                                <Link to={`/update/${item.id}`}><button><FaRegEdit size={30} /></button></Link>
-                                                <button onClick={() => handleBlogDelete(item.id)} ><MdDelete size={30} /></button>
-                                                {/* {console.log('delete blog id', item.id)} */}
-                                            </>
-                                            : null
-                                        }
+                    <div className='blog-readmore-edit-btn'>
+                        <div>
+                            <Link to={`/detail/${id}`} >
+                                <BlogButton text='Read More' />
+                            </Link>
 
-                                    </div>
-                                </div>
-
-                            </div>
                         </div>
-                    )
-                })
-            }
+                        <div className='blog-edit-delete'>
+                            {user && currentUserId === userId ?
+                                <>
+                                    <Link to={`/update/${id}`}><button><FaRegEdit size={30} /></button></Link>
+                                    <button onClick={() => handleBlogDelete(id)} ><MdDelete size={30} /></button>
+                                    {/* {console.log('delete blog id', item.id)} */}
+                                </>
+                                : null
+                            }
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     )
 }

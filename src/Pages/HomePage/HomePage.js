@@ -1,8 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './HomePage.css';
-import { onSnapshot, collection, query, orderBy, getDocs, where, limit, startAfter } from 'firebase/firestore';
+import {
+    onSnapshot,
+    collection,
+    query,
+    orderBy,
+    getDocs,
+    where,
+    limit,
+    startAfter
+} from 'firebase/firestore';
 import { db } from '../../Utility/Firebase/firebase';
-import { CloseButton, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import BlogSection from '../../Components/BlogSection/BlogSection';
 import Spinner from '../../Components/Spinner/Spinner';
 import Tags from '../../Components/Tags/Tags';
@@ -24,10 +33,11 @@ export default function HomePage() {
     const [lastVisible, setLastVisible] = useState(null);
     const queryString = useQuery();
     const searchQuery = queryString.get("searchQuery");
+    const [isBlogEmpty, setIsBlogEmpty] = useState(false)
 
     const location = useLocation();
 
-    const searchBlog = async () => {
+    const searchBlog = useCallback(async () => {
         const blogRef = collection(db, 'blogs');
         const searchTitleQuery = query(blogRef, where('title', '==', searchQuery));
         const searchTagQuery = query(blogRef, where('tags', 'array-contains', searchQuery));
@@ -44,16 +54,46 @@ export default function HomePage() {
         })
 
         const combinedSearch = searchTitleBlogs.concat(searchTagBlogs);
-        setBlogs(combinedSearch)
-    }
+        setBlogs(combinedSearch);
+        setIsBlogEmpty(true);
+    }, [searchQuery, setBlogs])
 
-    const getBlogs = async () => {
+    const getBlogs = useCallback(async () => {
         const blogRef = collection(db, 'blogs');
         const firstFour = query(blogRef, orderBy('title'), limit(4));
         const documentSnap = await getDocs(firstFour);
         setBlogs(documentSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
-        setLastVisible(documentSnap.docs.length - 1);
-    };
+        setLastVisible(documentSnap.docs[documentSnap.docs.length - 1]);
+    }, [setBlogs]);
+
+
+    const updateState = (docSnapShot) => {
+        const isCollectionEmpty = docSnapShot.size === 0;
+        if (!isCollectionEmpty) {
+            const blogsData = docSnapShot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+
+            }))
+            // setBlogs((blogs) => [...blogs, ...blogsData])
+            setBlogs([...blogs, ...blogsData]);
+            setLastVisible(docSnapShot.docs[docSnapShot.docs.length - 1]);
+        }
+        else {
+            toast.info("no blogs found");
+            setIsBlogEmpty(true)
+        }
+    }
+
+    const fetchMore = async () => {
+        setLoading(true);
+        const blogRef = collection(db, 'blogs');
+        const nextFour = query(blogRef, orderBy('title'), limit(4), startAfter(lastVisible));
+        const docSnapShot = await getDocs(nextFour);
+        updateState(docSnapShot);
+        setLoading(false);
+    }
+
 
     useEffect(() => {
         const subscribe = onSnapshot(
@@ -81,11 +121,14 @@ export default function HomePage() {
         return () => {
             subscribe();
         };
-    }, [setBlogs, setTags]);
+    }, [setTags]);
 
     useEffect(() => {
         getBlogs();
-    }, [getBlogs()])
+        setIsBlogEmpty(false);
+    }, [getBlogs])
+
+    // console.log('homepage',blogs)
 
     useEffect(() => {
         const uniqueTrendingBlogs = new Set(trend);
@@ -95,7 +138,7 @@ export default function HomePage() {
             }
         });
         setTrend([...uniqueTrendingBlogs]);
-    }, [blogs]);
+    }, [blogs, trend]);
 
     const handleChange = (e) => {
         const { value } = e.target;
@@ -103,13 +146,14 @@ export default function HomePage() {
             getBlogs();
         }
         setSearch(value);
+        setIsBlogEmpty(false);
     };
 
     useEffect(() => {
         if (!isNull(searchQuery)) {
             searchBlog();
         }
-    }, [searchQuery])
+    }, [searchQuery, searchBlog])
 
 
 
@@ -122,47 +166,30 @@ export default function HomePage() {
         return new URLSearchParams(useLocation().search);
     }
 
-    const updateState = (docSnapShot) => {
-        const isCollectionEmpty = docSnapShot.size === 0;
-        if (!isCollectionEmpty) {
-            const blogsData = docSnapShot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data()
-
-            }))
-            setBlogs((blogs) => [...blogs, ...blogsData])
-            setLastVisible(docSnapShot.docs.length - 1);
-        }
-        else{
-         toast.info("no blogs found");   
-        }
-
-
-    }
-
-    const fetchMore = async () => {
-        setLoading(true)
-        const blogRef = collection(db, 'blogs');
-        const nextFour = query(blogRef, orderBy('titles'), limit(4), startAfter(lastVisible));
-        const docSnapShot = await getDocs(nextFour);
-        updateState(docSnapShot)
-        setLoading(false)
-    }
-
     return (
         <div className="main-home">
             <h1>Home</h1>
             <Trending blogs={trend} />
             <div className="main-home-blogs">
                 <div className="home-blog-blogsection">
-                    <BlogSection blogs={blogs} />
+                    <h3>Daily Blogs</h3>
+                    <hr></hr>
+                    {blogs.map((blog) => {
+                        return (
+                            <BlogSection
+                                blogs={blogs}
+                                key={blog.id}
+                                {...blog}
+                            />)
+                    })}
+
                     {blogs.length === 0 && location.pathname !== '/' && (
                         <>
                             <h4>No Blog found with searched keyword :</h4>
                             <strong>{searchQuery}</strong>
                         </>
                     )}
-                    <BlogButton text='Load More' onClick={fetchMore} />
+                    {isBlogEmpty ? '' : <BlogButton text='Load More' onClick={fetchMore} />}
                 </div>
 
                 <div className="home-tag-popular">
