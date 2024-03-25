@@ -1,0 +1,10 @@
+.main-tag-blog-page{
+    text-align:center ;
+    padding: 1rem;
+}
+
+.tag-blogs-div{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}

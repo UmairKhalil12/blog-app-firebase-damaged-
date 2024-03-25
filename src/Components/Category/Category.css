@@ -1,0 +1,15 @@
+.category-list-li{
+    text-decoration: none;
+    list-style: none;
+    margin-left: 5rex;
+    margin-right: 5rem;
+    border-bottom: 0.5px solid gray;
+}
+
+.category-list-li a{
+    text-decoration: none;
+    color: gray;
+    display: flex;
+    justify-content: space-between;
+}
+

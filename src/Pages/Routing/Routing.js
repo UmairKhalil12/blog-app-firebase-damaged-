@@ -10,6 +10,7 @@ import useStore from "../../Utility/Zustand/Zustand";
 // import ErrorPage from "../ErrorPage/ErrorPage";
 import HomePage from "../HomePage/HomePage";
 import TagBlog from "../TagBlog/TagBlog";
+import CategoryBlog from "../CategoryBlog/CategoryBlog";
 
 
 export default function Routing() {
@@ -29,6 +30,7 @@ export default function Routing() {
             {user ? null : <Route path="/forgetpassword" element={<ForgetPassword />} />}
             <Route path="/search" element={<HomePage />} />
             <Route path="/tag/:tag" element={<TagBlog />} />
+            <Route path="/category/:category" element={<CategoryBlog />} />
            
         </Routes>
     )

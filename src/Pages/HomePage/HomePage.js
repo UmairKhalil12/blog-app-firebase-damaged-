@@ -8,7 +8,8 @@ import {
     getDocs,
     where,
     limit,
-    startAfter
+    startAfter,
+    count
 } from 'firebase/firestore';
 import { db } from '../../Utility/Firebase/firebase';
 import { toast } from 'react-toastify';
@@ -23,6 +24,7 @@ import isEmpty from 'lodash/isEmpty';
 import { useLocation } from 'react-router-dom';
 import { isNull } from 'lodash';
 import BlogButton from '../../Components/BlogButton/BlogButton';
+import Category from '../../Components/Category/Category';
 
 export default function HomePage() {
     const [loading, setLoading] = useState(true);
@@ -33,7 +35,9 @@ export default function HomePage() {
     const [lastVisible, setLastVisible] = useState(null);
     const queryString = useQuery();
     const searchQuery = queryString.get("searchQuery");
-    const [isBlogEmpty, setIsBlogEmpty] = useState(false)
+    const [isBlogEmpty, setIsBlogEmpty] = useState(false);
+    const [totalBlogs, setTotalBlogs] = useState(null);
+
 
     const location = useLocation();
 
@@ -109,6 +113,7 @@ export default function HomePage() {
                 setLoading(false);
                 const uniqueTags = [...new Set(tags)];
                 setTags(uniqueTags);
+                setTotalBlogs(list)
             },
             (error) => {
                 toast.error('Error fetching blogs');
@@ -156,8 +161,6 @@ export default function HomePage() {
     }, [searchQuery, searchBlog])
 
 
-
-
     if (loading) {
         return <Spinner />;
     }
@@ -165,6 +168,27 @@ export default function HomePage() {
     function useQuery() {
         return new URLSearchParams(useLocation().search);
     }
+
+    //category counts
+
+    const counts = totalBlogs.reduce((prevValue, currentValue) => {
+        let name = currentValue.category;
+        if (!prevValue.hasOwnProperty(name)) {
+            prevValue[name] = 0;
+        }
+        prevValue[name]++;
+        // delete prevValue["undefined"];
+        return prevValue;
+    }, {});
+
+    const categoryCount = Object.keys(counts).map((k) => {
+        return {
+            category: k,
+            count: counts[k],
+        };
+    });
+
+    console.log("categoryCount", categoryCount);
 
     return (
         <div className="main-home">
@@ -197,6 +221,7 @@ export default function HomePage() {
                         <Search search={search} handleChange={handleChange} />
                         <Tags tags={tags} />
                         <MostPopular blogs={blogs} />
+                        <Category catBlogsCount={categoryCount} />
                     </div>
                 </div>
             </div>
