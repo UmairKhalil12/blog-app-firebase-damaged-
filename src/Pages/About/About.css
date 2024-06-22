@@ -1,3 +1,7 @@
 .main-about h1{
     text-align: center;
 }
+
+.main-about{
+    margin: 1rem;
+}

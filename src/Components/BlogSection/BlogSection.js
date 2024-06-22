@@ -9,10 +9,13 @@ import { Link } from 'react-router-dom'
 import { deleteDoc, doc } from 'firebase/firestore'
 import { db } from '../../Utility/Firebase/firebase'
 import useStore from '../../Utility/Zustand/Zustand'
+import { useNavigate } from "react-router-dom"
+
 
 
 export default function BlogSection({id , title , imgUrl, category , author, timestamp , description , userId }) {
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate(); 
 
     // console.log('blog section loading',loading)
 
@@ -26,6 +29,7 @@ export default function BlogSection({id , title , imgUrl, category , author, tim
                 await deleteDoc(doc(db, 'blogs', id));
                 toast.success('Blog deleted successfully');
                 setLoading(false);
+                navigate("/home");
             }
             catch (error) {
                 toast.error('Error deleting blog');
