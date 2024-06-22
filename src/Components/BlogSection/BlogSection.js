@@ -30,6 +30,7 @@ export default function BlogSection({id , title , imgUrl, category , author, tim
                 toast.success('Blog deleted successfully');
                 setLoading(false);
                 navigate("/home");
+                window.location.reload(); 
             }
             catch (error) {
                 toast.error('Error deleting blog');

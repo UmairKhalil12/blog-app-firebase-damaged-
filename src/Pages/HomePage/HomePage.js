@@ -68,7 +68,7 @@ export default function HomePage() {
         const documentSnap = await getDocs(firstFour);
         setBlogs(documentSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
         setLastVisible(documentSnap.docs[documentSnap.docs.length - 1]);
-    }, [setBlogs]);
+    }, [setBlogs ]);
 
 
     const updateState = (docSnapShot) => {
