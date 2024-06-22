@@ -12,7 +12,7 @@ import MostPopular from '../../Components/MostPopular/MostPopular';
 export default function Details() {
   const [loading, setLoading] = useState(true)
   const { id } = useParams();
-  console.log('details id', id)
+  // console.log('details id', id)
   const [blog, setBlog] = useState(null);
   const { blogs } = useStore();
   const { tags } = useStore();

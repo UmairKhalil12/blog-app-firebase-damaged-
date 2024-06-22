@@ -203,6 +203,7 @@ export default function HomePage() {
                             <BlogSection
                                 blogs={blogs}
                                 key={blog.id}
+                                id={blog.id}
                                 {...blog}
                             />)
                     })}
