@@ -188,7 +188,7 @@ export default function HomePage() {
         };
     });
 
-    console.log("categoryCount", categoryCount);
+    // console.log("categoryCount", categoryCount);
 
     return (
         <div className="main-home">
